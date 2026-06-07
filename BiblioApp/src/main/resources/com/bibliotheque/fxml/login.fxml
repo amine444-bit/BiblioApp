@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.bibliotheque.controller.LoginController"
+           styleClass="login-root">
+
+    <VBox alignment="CENTER" spacing="0" maxWidth="420" maxHeight="520" styleClass="login-card">
+
+        <!-- Header -->
+        <VBox alignment="CENTER" spacing="8" styleClass="login-header">
+            <Label text="📚" styleClass="login-icon"/>
+            <Label text="Bibliothèque" styleClass="login-title"/>
+            <Label text="Système de Gestion" styleClass="login-subtitle"/>
+        </VBox>
+
+        <!-- Form -->
+        <VBox spacing="16" styleClass="login-form">
+            <VBox spacing="6">
+                <Label text="Nom d'utilisateur" styleClass="field-label"/>
+                <TextField fx:id="txtUsername" promptText="Entrez votre identifiant" styleClass="login-field"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="Mot de passe" styleClass="field-label"/>
+                <PasswordField fx:id="txtPassword" promptText="Entrez votre mot de passe" styleClass="login-field"/>
+            </VBox>
+
+            <Label fx:id="lblError" styleClass="error-label" visible="false" wrapText="true"/>
+
+            <Button text="Se Connecter" onAction="#handleLogin" styleClass="btn-primary" maxWidth="Infinity"/>
+
+            <Separator/>
+            <Label text="Admin: admin / admin123" styleClass="hint-label" alignment="CENTER"/>
+        </VBox>
+    </VBox>
+</StackPane>

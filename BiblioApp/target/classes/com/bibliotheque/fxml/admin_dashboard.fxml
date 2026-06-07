@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.bibliotheque.controller.AdminDashboardController"
+            styleClass="main-root">
+
+    <!-- TOP NAV -->
+    <top>
+        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="16">
+            <Label text="📚 Gestion Bibliothèque" styleClass="navbar-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="lblWelcome" styleClass="navbar-user"/>
+            <Button text="🚪 Déconnexion" onAction="#handleLogout" styleClass="btn-logout"/>
+        </HBox>
+    </top>
+
+    <!-- STATS BAR -->
+    <center>
+        <VBox spacing="0">
+            <HBox styleClass="stats-bar" spacing="16" alignment="CENTER">
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="4">
+                    <Label fx:id="lblTotalBooks" text="0" styleClass="stat-number"/>
+                    <Label text="Livres Total" styleClass="stat-label"/>
+                </VBox>
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="4">
+                    <Label fx:id="lblAvailableBooks" text="0" styleClass="stat-number"/>
+                    <Label text="Disponibles" styleClass="stat-label"/>
+                </VBox>
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="4">
+                    <Label fx:id="lblTotalMembers" text="0" styleClass="stat-number"/>
+                    <Label text="Membres" styleClass="stat-label"/>
+                </VBox>
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="4">
+                    <Label fx:id="lblActiveLoans" text="0" styleClass="stat-number"/>
+                    <Label text="Emprunts Actifs" styleClass="stat-label"/>
+                </VBox>
+            </HBox>
+
+            <!-- TABS -->
+            <TabPane fx:id="tabPane" styleClass="main-tabs" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+
+                <!-- BOOKS TAB -->
+                <Tab text="📖 Livres">
+                    <VBox spacing="12" styleClass="tab-content">
+                        <HBox spacing="12" alignment="CENTER_LEFT">
+                            <TextField fx:id="txtSearchBook" promptText="🔍 Rechercher un livre..." styleClass="search-field" HBox.hgrow="ALWAYS"/>
+                            <Button text="Rechercher" onAction="#handleSearchBook" styleClass="btn-secondary"/>
+                            <Button text="Tous les livres" onAction="#handleRefreshBooks" styleClass="btn-secondary"/>
+                            <Button text="➕ Ajouter" onAction="#handleAddBook" styleClass="btn-primary"/>
+                        </HBox>
+                        <TableView fx:id="tableBooks" VBox.vgrow="ALWAYS" styleClass="data-table">
+                            <columns>
+                                <TableColumn fx:id="colBookTitle" text="Titre" prefWidth="220"/>
+                                <TableColumn fx:id="colBookAuthor" text="Auteur" prefWidth="160"/>
+                                <TableColumn fx:id="colBookIsbn" text="ISBN" prefWidth="140"/>
+                                <TableColumn fx:id="colBookGenre" text="Genre" prefWidth="100"/>
+                                <TableColumn fx:id="colBookYear" text="Année" prefWidth="70"/>
+                                <TableColumn fx:id="colBookQty" text="Qté" prefWidth="50"/>
+                                <TableColumn fx:id="colBookAvail" text="Dispo" prefWidth="60"/>
+                                <TableColumn fx:id="colBookActions" text="Actions" prefWidth="160"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </Tab>
+
+                <!-- MEMBERS TAB -->
+                <Tab text="👥 Membres">
+                    <VBox spacing="12" styleClass="tab-content">
+                        <HBox spacing="12" alignment="CENTER_LEFT">
+                            <Label text="Liste des Membres" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+                            <Button text="➕ Ajouter Membre" onAction="#handleAddMember" styleClass="btn-primary"/>
+                        </HBox>
+                        <TableView fx:id="tableMembers" VBox.vgrow="ALWAYS" styleClass="data-table">
+                            <columns>
+                                <TableColumn fx:id="colMemberId" text="ID" prefWidth="50"/>
+                                <TableColumn fx:id="colMemberName" text="Nom Complet" prefWidth="200"/>
+                                <TableColumn fx:id="colMemberUsername" text="Identifiant" prefWidth="150"/>
+                                <TableColumn fx:id="colMemberEmail" text="Email" prefWidth="200"/>
+                                <TableColumn fx:id="colMemberDate" text="Inscription" prefWidth="130"/>
+                                <TableColumn fx:id="colMemberActions" text="Actions" prefWidth="160"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </Tab>
+
+                <!-- LOANS TAB -->
+                <Tab text="🔖 Emprunts">
+                    <VBox spacing="12" styleClass="tab-content">
+                        <HBox spacing="12" alignment="CENTER_LEFT">
+                            <Label text="Gestion des Emprunts" styleClass="section-title" HBox.hgrow="ALWAYS"/>
+                            <Button text="Tous" onAction="#handleShowAllLoans" styleClass="btn-secondary"/>
+                            <Button text="Actifs Seulement" onAction="#handleShowActiveLoans" styleClass="btn-secondary"/>
+                            <Button text="➕ Nouvel Emprunt" onAction="#handleNewLoan" styleClass="btn-primary"/>
+                        </HBox>
+                        <TableView fx:id="tableLoans" VBox.vgrow="ALWAYS" styleClass="data-table">
+                            <columns>
+                                <TableColumn fx:id="colLoanId" text="ID" prefWidth="50"/>
+                                <TableColumn fx:id="colLoanMember" text="Membre" prefWidth="180"/>
+                                <TableColumn fx:id="colLoanBook" text="Livre" prefWidth="220"/>
+                                <TableColumn fx:id="colLoanDate" text="Date Emprunt" prefWidth="120"/>
+                                <TableColumn fx:id="colLoanDue" text="Date Retour" prefWidth="120"/>
+                                <TableColumn fx:id="colLoanStatus" text="Statut" prefWidth="90"/>
+                                <TableColumn fx:id="colLoanActions" text="Actions" prefWidth="120"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </Tab>
+            </TabPane>
+        </VBox>
+    </center>
+</BorderPane>
